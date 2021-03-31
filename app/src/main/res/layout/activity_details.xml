@@ -6,18 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/ib_go_back"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="24dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
     <ImageView
-        android:id="@+id/coverArt"
+        android:id="@+id/iv_cover"
         android:layout_width="336dp"
         android:layout_height="336dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="48dp"
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <LinearLayout
-        android:id="@+id/horizontalLayout"
+        android:id="@+id/ll_horizontal"
         android:layout_width="336dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -25,24 +36,24 @@
         android:paddingTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/coverArt">
+        app:layout_constraintTop_toBottomOf="@id/iv_cover">
 
         <TextView
-            android:id="@+id/songTitle"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             tools:text="@tools:sample/lorem"/>
 
         <TextView
-            android:id="@+id/separator"
+            android:id="@+id/tv_separator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:text="@string/separator" />
 
         <TextView
-            android:id="@+id/songArtist"
+            android:id="@+id/tv_artist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -50,7 +61,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/verticalLayout"
+        android:id="@+id/ll_vertical"
         android:layout_width="336dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -58,10 +69,10 @@
         android:paddingTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/horizontalLayout">
+        app:layout_constraintTop_toBottomOf="@id/ll_horizontal">
 
         <TextView
-            android:id="@+id/songAlbum"
+            android:id="@+id/tv_album"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16dp"
@@ -71,7 +82,7 @@
             tools:text="@tools:sample/lorem"/>
 
         <TextView
-            android:id="@+id/songLength"
+            android:id="@+id/tv_song_length"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dp"
