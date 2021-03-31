@@ -1,5 +1,6 @@
-package com.calebderosier.playlistfeed.api
+package com.calebderosier.playlistfeed.data.api
 
+import androidx.lifecycle.MutableLiveData
 import com.calebderosier.playlistfeed.data.models.Playlist
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,5 +17,5 @@ object PlaylistRetriever {
         service = retrofit.create(DeezerService::class.java)
     }
 
-    suspend fun getPlaylist(): Playlist = service.retrievePlaylist()
+    suspend fun retrievePlaylist(): Playlist = service.getPlaylistFromDeezer()
 }

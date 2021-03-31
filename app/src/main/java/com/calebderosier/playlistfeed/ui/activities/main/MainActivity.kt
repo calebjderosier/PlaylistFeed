@@ -12,12 +12,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.calebderosier.playlistfeed.R
 import com.calebderosier.playlistfeed.api.PlaylistRetriever.getPlaylist
+import com.calebderosier.playlistfeed.data.api.PlaylistRetriever.retrievePlaylist
+import com.calebderosier.playlistfeed.data.models.Playlist
+import com.calebderosier.playlistfeed.data.models.Song
 import com.calebderosier.playlistfeed.ui.activities.details.DetailsActivity
 import com.calebderosier.playlistfeed.ui.adapters.SongListAdapter
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
+
+    private var playlist: Playlist? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         songList.layoutManager = LinearLayoutManager(this)
 
         if (isNetworkConnected()) {
-            retrievePlaylist()
+            getPlaylistFromAPI()
         } else {
             AlertDialog.Builder(this).setTitle("No Internet Connection")
                 .setMessage("Unable to pull API data. Please check your connection and try again.")
@@ -38,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     /*
     * Uses Retrofit coroutine to retrieve a playlist from the Deezer API, then updates corresponding fields
      */
-    private fun retrievePlaylist() {
+    private fun getPlaylistFromAPI() {
         val mainActivityJob = Job()
 
         val errorHandler = CoroutineExceptionHandler { _, exception ->
@@ -50,14 +56,14 @@ class MainActivity : AppCompatActivity() {
 
         val coroutineScope = CoroutineScope(mainActivityJob + Dispatchers.Main)
         coroutineScope.launch(errorHandler) {
-            val result = getPlaylist()
+            playlist = retrievePlaylist()
 
             // set playlist name and description
-            playlistTitle.text = result?.title
-            playlistDesc.text = result?.description
+            playlistTitle.text = playlist?.title
+            playlistDesc.text = playlist?.description
 
             // connect song list data to UI
-            songList.adapter = SongListAdapter(result)
+            songList.adapter = SongListAdapter(playlist)
         }
     }
 
@@ -75,13 +81,13 @@ class MainActivity : AppCompatActivity() {
     * Creates an intent through which to open a Song Details screen
      */
     fun openSongDetails(view: View) {
-        // TODO: get other playlist data from result here, pass into intent
+        // TODO: make song titles and artist not simply the first one in layout
+        val title = findViewById<TextView>(R.id.songTitle).text
+        val artist = findViewById<TextView>(R.id.songArtist).text
+        val songData: Song? = playlist?.tracks?.data?.first { item -> (item.title === title && item.artist.name === artist)}
 
-        val title = findViewById<TextView>(R.id.songTitle)
-        val artist = findViewById<TextView>(R.id.songArtist)
         val intent = Intent(this, DetailsActivity::class.java)
-        intent.putExtra("title", title.text)
-        intent.putExtra("artist", artist.text)
+        intent.putExtra("songJson", Gson().toJson(songData))
         startActivity(intent)
     }
 

@@ -1,4 +1,4 @@
-package com.calebderosier.playlistfeed.data
+package com.calebderosier.playlistfeed.data.models
 
 data class Playlist(
     val id: String,
