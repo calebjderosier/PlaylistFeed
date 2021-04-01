@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.calebderosier.playlistfeed.R
 import com.calebderosier.playlistfeed.data.models.Song
 import com.calebderosier.playlistfeed.databinding.ActivityDetailsBinding
 import com.google.gson.Gson
+import com.google.gson.JsonElement
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_details.*
 
@@ -27,27 +27,33 @@ class DetailsActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory).get(DetailsViewModel::class.java)
         binding.viewModel = viewModel
 
-        val song = Gson().fromJson(intent.getStringExtra("songJson"), Song::class.java)
-        viewModel.init(song)
+        val songJson: String? = intent?.getStringExtra("songJson") ?: null
+        if (songJson != null) {
+            val song = Gson().fromJson(songJson, Song::class.java)
+            viewModel.init(song)
+            updateUI(song)
+        }
 
-        viewModel.requestActivityClose.observe(this, Observer {
+        viewModel.requestActivityClose.observe(this, {
             finish()
         })
 
-        updateUI(song)
     }
 
     /*
     * Updates UI with data passed in with the given [song] object
      */
-    fun updateUI(song: Song) {
-        Picasso.get().load(song.album.cover_big).into(iv_cover)
-        if (song.explicit_lyrics == false) iv_explicit_icon.setVisibility(View.INVISIBLE)
+    private fun updateUI(song: Song) {
+        Picasso.get().load(song.album?.cover_big).into(iv_cover)
+        if (song.explicit_lyrics) iv_explicit_icon.setVisibility(View.INVISIBLE)
         tv_song_length.text = parseLength(song.duration.toInt())
     }
 
     /*
     * Returns a string representing the given [lengthInSecs] in mins and secs with format XXmXXs
      */
-    private fun parseLength(lengthInSecs: Int) = "${lengthInSecs / 60}m${lengthInSecs % 60}s"
+    fun parseLength(lengthInSecs: Int): String {
+        if (lengthInSecs > 0) return "${lengthInSecs / 60}m${lengthInSecs % 60}s"
+        return "0m0s"
+    }
 }

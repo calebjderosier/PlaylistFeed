@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="light_blue">#DBE9FF</color>
-    <color name="blue_gray">#919EB3</color>
+    <color name="blue">#5097FF</color>
+    <color name="light_blue">#3386FF</color>
     <color name="light_green">#F0FAF3</color>
     <color name="gray_green">#91B3A2</color>
     <color name="dark_red">#3E0215</color>
@@ -10,6 +10,7 @@
     <color name="dark_purple">#4B3038</color>
     <color name="light_gray">#D3D3D3</color>
     <color name="medium_gray">#DCDCDC</color>
+    <color name="dark_gray">#222222</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
