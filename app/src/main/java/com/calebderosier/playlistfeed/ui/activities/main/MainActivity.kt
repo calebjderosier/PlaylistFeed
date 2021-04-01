@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     /*
     * Dialog option to retry pulling API data after reconnecting to the Internet
      */
-    val retry = { dialog: DialogInterface, which: Int ->
+    val retry = { _: DialogInterface, _: Int ->
         getPlaylistAndUpdateUI()
     }
 
