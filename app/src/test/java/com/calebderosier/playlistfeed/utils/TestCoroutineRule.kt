@@ -23,8 +23,4 @@ class TestCoroutineRule : TestRule {
             testCoroutineScope.cleanupTestCoroutines()
         }
     }
-
-    fun runBlockingTest(block: suspend TestCoroutineScope.() -> Unit) =
-        testCoroutineScope.runBlockingTest { block() }
-
 }

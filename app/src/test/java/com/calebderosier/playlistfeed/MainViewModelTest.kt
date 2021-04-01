@@ -48,11 +48,11 @@ class MainViewModelTest {
 
     @Test
     fun `verify isLoading and isError are true & false respectively`() = runBlocking {
-        var isLoading = isLoadingLiveData.value
+        val isLoading = isLoadingLiveData.value
         assertNotNull(isLoading)
         isLoading?.let { assertTrue(it) }
 
-        var isError = isErrorLiveData.value
+        val isError = isErrorLiveData.value
         assertNotNull(isError)
         isError?.let { assertFalse(it) }
 

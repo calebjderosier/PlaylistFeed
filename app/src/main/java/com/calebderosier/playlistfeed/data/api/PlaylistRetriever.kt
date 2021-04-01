@@ -4,6 +4,9 @@ import com.calebderosier.playlistfeed.data.models.Playlist
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/*
+* Singleton from which DeezerService is called
+ */
 object PlaylistRetriever {
     private val service: DeezerService
 

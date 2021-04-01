@@ -1,6 +1,5 @@
 package com.calebderosier.playlistfeed.ui.activities.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +10,7 @@ import kotlin.coroutines.CoroutineContext
 
 open class MainViewModel: ViewModel(), CoroutineScope {
 
-    val viewModelJob = Job()
+    private val viewModelJob = Job()
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + viewModelJob
@@ -21,36 +20,20 @@ open class MainViewModel: ViewModel(), CoroutineScope {
         MutableLiveData<Playlist>()
     }
 
+    private lateinit var isLoading: MutableLiveData<Boolean>
+    private lateinit var showError: MutableLiveData<Boolean>
+
     init {
-        getIsLoading()
-        shouldShowError()
+        initializeProperties()
         getPlaylistFromAPI()
     }
 
-    private lateinit var isLoading: MutableLiveData<Boolean>
-
     /*
-    * Returns a live Boolean indicating whether the data is currently loading
+    * Set initial values of isLoading and showError live booleans
      */
-    open fun getIsLoading(): LiveData<Boolean> {
-        if (!::isLoading.isInitialized) {
-            isLoading = MutableLiveData()
-            isLoading.value = false
-        }
-        return isLoading
-    }
-
-    private lateinit var showError: MutableLiveData<Boolean>
-
-    /*
-    * Returns a live Boolean indicating whether to show an error
-     */
-    open fun shouldShowError(): LiveData<Boolean> {
-        if (!::showError.isInitialized) {
-            showError = MutableLiveData()
-            showError.value = false
-        }
-        return showError
+    private fun initializeProperties() {
+        getIsLoading()
+        shouldShowError()
     }
 
     /*
@@ -69,5 +52,27 @@ open class MainViewModel: ViewModel(), CoroutineScope {
             }
 
         }
+    }
+
+    /*
+    * Returns a live Boolean indicating whether the data is currently loading
+     */
+    open fun getIsLoading(): LiveData<Boolean> {
+        if (!::isLoading.isInitialized) {
+            isLoading = MutableLiveData()
+            isLoading.value = false
+        }
+        return isLoading
+    }
+
+    /*
+    * Returns a live Boolean indicating whether to show an error
+     */
+    open fun shouldShowError(): LiveData<Boolean> {
+        if (!::showError.isInitialized) {
+            showError = MutableLiveData()
+            showError.value = false
+        }
+        return showError
     }
 }

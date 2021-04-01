@@ -1,12 +1,10 @@
 package com.calebderosier.playlistfeed.api
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.calebderosier.playlistfeed.data.api.DeezerService
 import com.calebderosier.playlistfeed.data.api.PlaylistRetriever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
