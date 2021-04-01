@@ -16,5 +16,8 @@ object PlaylistRetriever {
         service = retrofit.create(DeezerService::class.java)
     }
 
+    /*
+    * Public function that calls the Deezer API using an instance of DeezerService
+     */
     suspend fun retrievePlaylist(): Playlist = service.getPlaylistFromDeezer()
 }

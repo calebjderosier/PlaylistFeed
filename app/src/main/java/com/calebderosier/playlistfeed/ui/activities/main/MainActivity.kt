@@ -2,26 +2,18 @@ package com.calebderosier.playlistfeed.ui.activities.main
 
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.calebderosier.playlistfeed.R
 import com.calebderosier.playlistfeed.data.models.Playlist
-import com.calebderosier.playlistfeed.data.models.Song
-import com.calebderosier.playlistfeed.ui.activities.details.DetailsActivity
 import com.calebderosier.playlistfeed.ui.adapters.SongListAdapter
-import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.song_item.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,19 +51,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
-    *
+    * Generates ViewModel from MainViewModelFactory
      */
-    val retry = { dialog: DialogInterface, which: Int ->
-        getPlaylistAndUpdateUI()
-    }
-
     private fun generateViewModel() {
         val factory = MainViewModelFactory()
         viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
     }
 
     /*
-    * Helper function to check whether the device is connected to the Internet
+    * Dialog option to retry pulling API data after reconnecting to the Internet
+     */
+    val retry = { dialog: DialogInterface, which: Int ->
+        getPlaylistAndUpdateUI()
+    }
+
+    /*
+    * Returns boolean indicating whether the device is connected to the Internet
      */
     private fun isNetworkConnected(): Boolean {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -80,5 +75,4 @@ class MainActivity : AppCompatActivity() {
         return networkCapabilities != null && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
-    private fun convertSecsToHrMin(lengthInSecs: Int) = "${lengthInSecs / 3600}h ${(lengthInSecs % 3600) / 60}m"
 }
