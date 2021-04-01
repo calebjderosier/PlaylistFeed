@@ -17,7 +17,7 @@ A superior implementation would’ve used Dagger 2 for dependency injection, but
 Testing 
 -------------
 
-The test suite uses a combination of JUnit, Espresso, Mockito, and Robolectric for testing. However, the lack of DI massively limited the thoroughness of the tests, so they are rather simplistic on the whole. 
+The test suite uses a combination of JUnit, Espresso, and Mockito for testing. However, the lack of DI massively limited the thoroughness of the tests, so they are rather simplistic on the whole. 
 
 The androidTest folder contains tests for MainActivity, DetailsActivity, and the API Service/Playlist Retriever, while the test folder contains the tests for MainViewModel. 
 
@@ -40,5 +40,3 @@ Libraries
 • [Mockito](https://site.mockito.org) for mocking
 
 • [Picasso](https://square.github.io/picasso/) for image loading
-
-• [Robolectric](http://robolectric.org)
