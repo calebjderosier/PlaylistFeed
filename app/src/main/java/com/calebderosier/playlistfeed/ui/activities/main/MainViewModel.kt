@@ -1,6 +1,5 @@
 package com.calebderosier.playlistfeed.ui.activities.main
 
-import android.R
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

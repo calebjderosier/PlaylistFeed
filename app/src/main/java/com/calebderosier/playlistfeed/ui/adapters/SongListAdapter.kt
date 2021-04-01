@@ -1,13 +1,19 @@
 package com.calebderosier.playlistfeed.ui.adapters
 
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.calebderosier.playlistfeed.R
 import com.calebderosier.playlistfeed.data.models.Playlist
 import com.calebderosier.playlistfeed.data.models.Song
 import com.calebderosier.playlistfeed.extensions.ctx
+import com.calebderosier.playlistfeed.ui.activities.details.DetailsActivity
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.song_item.view.*
 
@@ -20,18 +26,24 @@ class SongListAdapter(private val playlist: Playlist?) : RecyclerView.Adapter<So
 
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
         if (playlist?.tracks?.data == null) return
+        holder.songView.setOnClickListener {
+            val context = it.getContext()
+            val intent = Intent(context, DetailsActivity::class.java)
+            intent.putExtra("songJson", Gson().toJson(playlist.tracks.data[position]))
+            context.startActivity(intent)
+        }
         holder.bindPlaylist(playlist.tracks.data[position])
     }
 
-    override fun getItemCount(): Int = (playlist?.nb_tracks ?: 1) - 1
+    override fun getItemCount(): Int = (playlist?.nb_tracks ?: 0)
 
     class SongViewHolder(val songView: View) : RecyclerView.ViewHolder(songView) {
+
         fun bindPlaylist(song: Song?) {
-            Picasso.get().load(song?.album?.cover_small).into(songView.songArtwork)
+            Picasso.get().load(song?.album?.cover_small).into(songView.iv_song_artwork)
 
-            songView.songTitle.text = song?.title ?: ""
-            songView.songArtist.text = song?.artist?.name ?: ""
-
+            songView.tv_song_title.text = song?.title ?: ""
+            songView.tv_song_artist.text = song?.artist?.name ?: ""
         }
     }
 }

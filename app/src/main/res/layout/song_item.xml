@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:onClick="openSongDetails"
+    android:background="@drawable/pressed_bg"
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/songArtwork"
+        android:id="@+id/iv_song_artwork"
         android:layout_width="48dp"
         android:layout_height="48dp" />
 
@@ -20,15 +20,19 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/songTitle"
+            android:id="@+id/tv_song_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="4dp" />
+            android:textSize="16sp"
+            android:paddingBottom="4dp"
+            tools:text="@tools:sample/lorem" />
 
         <TextView
-            android:id="@+id/songArtist"
+            android:id="@+id/tv_song_artist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="14sp"
+            android:layout_height="wrap_content"
+            tools:text="@tools:sample/lorem"/>
 
     </LinearLayout>
 </LinearLayout>

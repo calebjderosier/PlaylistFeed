@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">PlaylistFeed</string>
-    <string name="separator"> • </string>
+    <string name="separator">\u0020•\u0020</string>
 </resources>

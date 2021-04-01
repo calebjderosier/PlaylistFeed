@@ -1,11 +1,11 @@
 package com.calebderosier.playlistfeed.ui.activities.details
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.calebderosier.playlistfeed.R
 import com.calebderosier.playlistfeed.data.models.Song
-import com.calebderosier.playlistfeed.ui.activities.details.DetailsViewModelFactory
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_details.*
@@ -23,13 +23,23 @@ class DetailsActivity : AppCompatActivity() {
 
         val song = Gson().fromJson(intent.getStringExtra("songJson"), Song::class.java)
         updateUI(song)
+
+//        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+//            // Handle the back button event
+//        }
     }
 
+    /*
+    * Updates UI with data passed in via song object
+    *
+    * @param song: Song object containing data through which to update UI
+     */
     fun updateUI(song: Song) {
         Picasso.get().load(song.album.cover_big).into(iv_cover)
+        if (song.explicit_lyrics == false) iv_explicit_icon.setVisibility(View.INVISIBLE)
         tv_title.text = song.title
         tv_artist.text = song.artist.name
-        tv_album.text = song.album.title
+//        tv_album.text = song.album.title
         tv_song_length.text = parseLength(song.duration.toInt())
     }
 

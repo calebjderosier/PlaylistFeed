@@ -1,10 +1,12 @@
 package com.calebderosier.playlistfeed.ui.activities.main
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -17,7 +19,9 @@ import com.calebderosier.playlistfeed.data.models.Song
 import com.calebderosier.playlistfeed.ui.activities.details.DetailsActivity
 import com.calebderosier.playlistfeed.ui.adapters.SongListAdapter
 import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.song_item.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,32 +31,43 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val factory = MainViewModelFactory()
-        viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
         rv_song_list.layoutManager = LinearLayoutManager(this)
 
+        getPlaylistAndUpdateUI()
+    }
+
+    /*
+    * Gets playlist from ViewModel and updates Main Activity UI accordingly
+    * If network is not connected, offers Try Again option
+     */
+    private fun getPlaylistAndUpdateUI() {
         if (isNetworkConnected()) {
-            getPlaylistAndUpdateUI()
+            generateViewModel()
+            viewModel.playlist.observe(this, Observer<Playlist>{ playlist ->
+                // set playlist header artwork
+                Picasso.get().load(playlist.picture_big).into(iv_toolbar_bg)
+                rv_song_list.scheduleLayoutAnimation()
+                // connect song list data to UI
+                rv_song_list.adapter = SongListAdapter(playlist)
+            })
         } else {
             AlertDialog.Builder(this).setTitle("No Internet Connection")
                 .setMessage("Unable to pull API data. Please check your connection and try again.")
-                .setPositiveButton(android.R.string.ok) { _, _ -> }
+                .setPositiveButton("Retry", DialogInterface.OnClickListener(function = retry))
                 .setIcon(android.R.drawable.ic_dialog_alert).show()
         }
     }
 
     /*
-    * Gets playlist from ViewModel and updates Main Activity UI accordingly
+    *
      */
-    private fun getPlaylistAndUpdateUI() {
-        viewModel.playlist.observe(this, Observer<Playlist>{ playlist ->
-            // set playlist name and description
-            tv_playlist_title.text = playlist?.title
-            tv_playlist_desc.text = playlist?.description
+    val retry = { dialog: DialogInterface, which: Int ->
+        getPlaylistAndUpdateUI()
+    }
 
-            // connect song list data to UI
-            rv_song_list.adapter = SongListAdapter(playlist)
-        })
+    private fun generateViewModel() {
+        val factory = MainViewModelFactory()
+        viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
     }
 
     /*
@@ -65,20 +80,5 @@ class MainActivity : AppCompatActivity() {
         return networkCapabilities != null && networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
-    /*
-    * Creates an intent through which to open a Song Details screen
-    *
-    * @param view:
-     */
-    fun openSongDetails(view: View) {
-        // TODO: make song titles and artist not simply the first one in layout
-        val title = findViewById<TextView>(R.id.tv_title).text
-        val artist = findViewById<TextView>(R.id.tv_artist).text
-        val songData: Song? = viewModel.playlist.value?.tracks?.data?.first { item -> (item.title === title && item.artist.name === artist)}
-
-        val intent = Intent(this, DetailsActivity::class.java)
-        intent.putExtra("songJson", Gson().toJson(songData))
-        startActivity(intent)
-    }
-
+    private fun convertSecsToHrMin(lengthInSecs: Int) = "${lengthInSecs / 3600}h ${(lengthInSecs % 3600) / 60}m"
 }
