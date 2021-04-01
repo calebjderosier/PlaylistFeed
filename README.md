@@ -7,7 +7,7 @@ This is an app that gets a playlist (presently, “Chill Hits”) from the Deeze
 Introduction
 -------------
 
-The app implements an MVVM architecture to display and pass the data pulled from the Deezer API, which does not require an API key. 
+The app implements an MVVM architecture to display and manage the data pulled from the Deezer API, which does not require an API key. 
 
 The Deezer API is called from [`PlaylistRetriever`](app/src/main/java/com/calebderosier/playlistfeed/data/api/PlaylistRetriever.kt) via the [`DeezerService`](app/src/main/java/com/calebderosier/playlistfeed/data/api/DeezerService.kt) interface, and the resulting data conforms to the class definitions within the Playlist class in [`Response`](app/src/main/java/com/calebderosier/playlistfeed/data/models/Response.kt). The [`MainActivity`](app/src/main/java/com/calebderosier/playlistfeed/ui/activities/main/MainActivity.kt) observes the change in the [`MainViewModel`](app/src/main/java/com/calebderosier/playlistfeed/ui/activities/main/MainViewModel.kt) and populates the song list using the [`SongListAdapter`](app/src/main/java/com/calebderosier/playlistfeed/ui/adapters/SongListAdapter.kt), which also enables each item to navigate to the [`DetailsActivity`](app/src/main/java/com/calebderosier/playlistfeed/ui/activities/details/DetailsActivity.kt). 
 
