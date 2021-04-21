@@ -1,4 +1,4 @@
-package com.calebderosier.playlistfeed.dagger
+package com.calebderosier.playlistfeed.dagger.modules
 
 import com.calebderosier.playlistfeed.data.api.DeezerService
 import com.calebderosier.playlistfeed.data.api.PlaylistRepository

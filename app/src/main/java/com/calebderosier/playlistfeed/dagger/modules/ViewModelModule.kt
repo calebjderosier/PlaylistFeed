@@ -1,7 +1,8 @@
-package com.calebderosier.playlistfeed.dagger
+package com.calebderosier.playlistfeed.dagger.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.calebderosier.playlistfeed.dagger.ViewModelKey
 import com.calebderosier.playlistfeed.ui.viewmodels.DetailsViewModel
 import com.calebderosier.playlistfeed.ui.viewmodels.MainViewModel
 import com.calebderosier.playlistfeed.ui.viewmodels.ViewModelFactory

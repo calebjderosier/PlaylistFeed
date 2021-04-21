@@ -2,6 +2,9 @@ package com.calebderosier.playlistfeed.dagger
 
 import android.app.Application
 import com.calebderosier.playlistfeed.PlaylistFeedApp
+import com.calebderosier.playlistfeed.dagger.modules.AppModule
+import com.calebderosier.playlistfeed.dagger.modules.MainActivityModule
+import com.calebderosier.playlistfeed.dagger.modules.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
