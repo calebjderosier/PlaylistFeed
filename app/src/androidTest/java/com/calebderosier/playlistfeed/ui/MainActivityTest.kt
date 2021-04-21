@@ -7,7 +7,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.calebderosier.playlistfeed.ui.activities.main.MainActivity
+import com.calebderosier.playlistfeed.ui.views.MainActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -43,7 +43,7 @@ class MainActivityTest {
         assertEquals("com.calebderosier.playlistfeed", appContext.packageName)
     }
 
-    /*
+    /**
     * Verify that RecyclerView adapter is not defined on initial creation of class
      */
     @Test

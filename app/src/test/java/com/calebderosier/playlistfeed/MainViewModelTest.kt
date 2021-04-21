@@ -6,7 +6,7 @@ import org.junit.Assert.*
 import org.junit.Rule
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
-import com.calebderosier.playlistfeed.ui.activities.main.MainViewModel
+import com.calebderosier.playlistfeed.ui.viewmodels.MainViewModel
 import com.calebderosier.playlistfeed.utils.TestCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -42,8 +42,8 @@ class MainViewModelTest {
     @Before
     fun setup() {
         mainViewModel = MainViewModel()
-        isLoadingLiveData = mainViewModel.getIsLoading()
-        isErrorLiveData = mainViewModel.shouldShowError()
+        isLoadingLiveData = mainViewModel.isLoading
+        isErrorLiveData = mainViewModel.showError
     }
 
     @Test

@@ -1,7 +1,7 @@
 package com.calebderosier.playlistfeed.api
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.calebderosier.playlistfeed.data.api.PlaylistRetriever
+import com.calebderosier.playlistfeed.data.api.PlaylistRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
@@ -17,11 +17,11 @@ class ApiResponseTest {
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    /*
+    /**
     * Verify that the Deezer API result is not null
      */
     @Test
     fun verifyResultIsNotNull() = runBlocking {
-        Assert.assertNotNull(PlaylistRetriever.retrievePlaylist())
+        Assert.assertNotNull(PlaylistRepository.retrievePlaylist())
     }
 }

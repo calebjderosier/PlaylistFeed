@@ -7,7 +7,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.calebderosier.playlistfeed.ui.activities.details.DetailsActivity
+import com.calebderosier.playlistfeed.ui.views.DetailsActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
@@ -42,7 +42,7 @@ class DetailsActivityTest {
         assertEquals("com.calebderosier.playlistfeed", appContext.packageName)
     }
 
-    /*
+    /**
     * Test parseLength() function in DetailsActivity, ensure it returns expected results
      */
     @Test

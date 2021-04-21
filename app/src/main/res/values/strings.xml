@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">PlaylistFeed</string>
     <string name="separator">\u0020•\u0020</string>
+    <string name="noConnection">No Internet Connection</string>
+    <string name="cannotPullData">Unable to pull API data. Please check your connection and try again.</string>
+    <string name="retry">Retry</string>
 </resources>

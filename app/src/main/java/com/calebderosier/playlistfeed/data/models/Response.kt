@@ -1,81 +1,145 @@
 package com.calebderosier.playlistfeed.data.models
 
+import com.google.gson.annotations.SerializedName
+
 data class Playlist(
-    val id: String = "",
-    val title: String = "",
-    val description: String = "",
-    val duration: Int = 0,
-    val public: Boolean = false,
-    val is_loved_track: Boolean = false,
-    val collaborative: Boolean = false,
-    val nb_tracks: Int = 0,
-    val fans: Int = 0,
-    val link: String = "",
-    val share: String = "",
-    val picture: String = "",
-    val picture_small: String = "",
-    val picture_medium: String = "",
-    val picture_big: String = "",
-    val picture_xl: String = "",
-    val checksum: String = "",
-    val tracklist: String = "",
-    val creation_date: String = "",
-    val md5_image: String = "",
-    val picture_type: String = "",
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("title")
+    val title: String,
+    @SerializedName("description")
+    val description: String,
+    @SerializedName("duration")
+    val duration: Int,
+    @SerializedName("public")
+    val isPublic: Boolean,
+    @SerializedName("is_loved_track")
+    val isLovedTrack: Boolean,
+    @SerializedName("collaborative")
+    val isCollaborative: Boolean,
+    @SerializedName("nb_tracks")
+    val numberOfTracks: Int,
+    @SerializedName("fans")
+    val numberOfFans: Int,
+    @SerializedName("link")
+    val link: String,
+    @SerializedName("share")
+    val share: String,
+    @SerializedName("picture")
+    val picture: String,
+    @SerializedName("picture_small")
+    val pictureSmall: String,
+    @SerializedName("picture_medium")
+    val pictureMedium: String,
+    @SerializedName("picture_big")
+    public val pictureLarge: String,
+    @SerializedName("picture_xl")
+    val pictureXL: String,
+    @SerializedName("checksum")
+    val checksum: String,
+    @SerializedName("tracklist")
+    val trackList: String,
+    @SerializedName("creation_date")
+    val creationDate: String,
+    @SerializedName("md5_image")
+    val md5: String,
+    @SerializedName("picture_type")
+    val pictureType: String,
+    @SerializedName("creator")
     val creator: Creator,
-    val type: String = "",
+    @SerializedName("type")
+    val type: String,
+    @SerializedName("tracks")
     val tracks: TrackList,
 )
 
 data class Creator(
-    val id: String = "",
-    val name: String = "",
-    val tracklist: String = "",
-    val type: String = ""
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("tracklist")
+    val trackList: String,
+    @SerializedName("type")
+    val type: String
 )
 
 data class TrackList(
+    @SerializedName("data")
     val data: List<Song>?,
-    val checksum: String = ""
+    @SerializedName("checksum")
+    val checksum: String
 )
 
 data class Song(
-    val id: String = "",
-    val readable: Boolean = false,
-    val title: String = "",
-    val title_short: String = "",
-    val title_version: String = "",
-    val link: String = "",
-    val duration: String = "",
-    val rank: String = "",
-    val explicit_lyrics: Boolean = false,
-    val explicit_content_lyrics: Int = 0,
-    val explicit_content_cover: Int = 0,
-    val preview: String = "",
-    val md5_image: String = "",
-    val time_add: Int = 0,
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("readable")
+    val readable: Boolean,
+    @SerializedName("title")
+    val title: String,
+    @SerializedName("title_short")
+    val titleShort: String,
+    @SerializedName("title_version")
+    val titleVersion: String,
+    @SerializedName("link")
+    val link: String,
+    @SerializedName("duration")
+    val duration: String,
+    @SerializedName("rank")
+    val rank: String,
+    @SerializedName("explicit_lyrics")
+    val isExplicit: Boolean,
+    @SerializedName("explicit_content_lyrics")
+    val explicitContentLyrics: Int,
+    @SerializedName("explicit_content_cover")
+    val explicitContentCover: Int,
+    @SerializedName("preview")
+    val preview: String,
+    @SerializedName("md5_image")
+    val md5: String,
+    @SerializedName("time_add")
+    val timeAdd: Int,
+    @SerializedName("artist")
     val artist: Artist?,
+    @SerializedName("album")
     val album: Album?,
-    val type: String = ""
+    @SerializedName("type")
+    val type: String
 )
 
 data class Artist(
-    val id: String = "",
-    val name: String = "",
-    val link: String = "",
-    val tracklist: String = "",
-    val type: String = ""
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("link")
+    val link: String,
+    @SerializedName("tracklist")
+    val trackList: String,
+    @SerializedName("type")
+    val type: String
 )
 
 data class Album(
-    val id: String = "",
-    val title: String = "",
-    val cover: String = "",
-    val cover_small: String = "",
-    val cover_medium: String = "",
-    val cover_big: String = "",
-    val cover_xl: String = "",
-    val md5_image: String = "",
-    val tracklist: String = "",
-    val type: String = ""
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("title")
+    val title: String,
+    @SerializedName("cover")
+    val cover: String,
+    @SerializedName("cover_small")
+    val coverSmall: String,
+    @SerializedName("cover_medium")
+    val coverMedium: String,
+    @SerializedName("cover_big")
+    val coverLarge: String,
+    @SerializedName("cover_xl")
+    val coverXL: String,
+    @SerializedName("md5_image")
+    val md5: String,
+    @SerializedName("tracklist")
+    val trackList: String,
+    @SerializedName("type")
+    val type: String
 )
