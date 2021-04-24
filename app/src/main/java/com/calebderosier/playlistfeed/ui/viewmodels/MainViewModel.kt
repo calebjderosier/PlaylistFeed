@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.calebderosier.playlistfeed.data.api.PlaylistRepository
 import com.calebderosier.playlistfeed.data.models.Playlist
+import com.calebderosier.playlistfeed.util.asLiveData
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -14,13 +15,13 @@ open class MainViewModel @Inject constructor(private val playlistRepository: Pla
     private val mutablePlaylist: MutableLiveData<Playlist> by lazy {
         MutableLiveData<Playlist>()
     }
-    val playlist: LiveData<Playlist> = mutablePlaylist.asLiveData()
+    val playlist = mutablePlaylist.asLiveData()
 
     private val mutableIsLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = mutableIsLoading.asLiveData()
+    val isLoading = mutableIsLoading.asLiveData()
 
     private val mutableShowError = MutableLiveData<Boolean>()
-    val showError: LiveData<Boolean> = mutableShowError.asLiveData()
+    val showError = mutableShowError.asLiveData()
 
     init {
         getPlaylistFromAPI()
@@ -43,9 +44,4 @@ open class MainViewModel @Inject constructor(private val playlistRepository: Pla
 
         }
     }
-
-    /**
-     * Extension function to return a LiveData object from MutableLiveData
-     */
-    private fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
 }

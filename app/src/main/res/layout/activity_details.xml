@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
+
         <variable
             name="viewModel"
             type="com.calebderosier.playlistfeed.ui.viewmodels.DetailsViewModel" />
@@ -21,12 +23,14 @@
             android:background="?android:attr/selectableItemBackground"
             android:onClick="@{()->viewModel.onBackButtonClicked()}"
             android:src="@drawable/ic_back_arrow"
+            android:tint="?attr/colorOnSecondary"
             tools:ignore="ContentDescription" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/ll_scrollview"
@@ -47,7 +51,7 @@
                         android:layout_width="336dp"
                         android:layout_height="336dp"
                         android:contentDescription="@string/ivCoverDesc"
-                        app:srcCompat="@drawable/ic_launcher_background" />
+                        app:imageUrl="@{viewModel.song.albumArtworkUrl}" />
                 </androidx.cardview.widget.CardView>
 
                 <LinearLayout
@@ -72,7 +76,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="22sp"
                         android:paddingBottom="4dp"
-                        tools:text="@{viewModel.song.artist.name}"/>
+                        tools:text="@{viewModel.song.artist}"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
@@ -86,7 +90,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
                             android:textStyle="italic"
-                            tools:text="@tools:sample/lorem"/>
+                            tools:text="@{viewModel.song.duration}"/>
 
                         <ImageView
                             android:id="@+id/iv_explicit_icon"
@@ -94,6 +98,7 @@
                             android:layout_height="24dp"
                             android:layout_gravity="center"
                             android:paddingLeft="8dp"
+                            android:visibility="@{viewModel.song.isExplicit ? View.VISIBLE : View.GONE}"
                             android:contentDescription="@string/ivExplicitIconDesc"
                             android:src="@drawable/explicit"/>
                     </LinearLayout>

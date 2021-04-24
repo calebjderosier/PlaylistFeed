@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.calebderosier.playlistfeed.data.models.Playlist
 import com.calebderosier.playlistfeed.data.models.Song
+import com.calebderosier.playlistfeed.data.models.SongDetails
 import com.calebderosier.playlistfeed.databinding.SongItemBinding
 import com.calebderosier.playlistfeed.ui.views.DetailsActivity
+import com.calebderosier.playlistfeed.util.secsToMinsAndSecsStr
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 
@@ -21,9 +23,18 @@ class SongListAdapter(private val playlist: Playlist?) : RecyclerView.Adapter<So
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
         if (playlist?.tracks?.data == null) return
         holder.itemBinding.llSongRow.setOnClickListener {
+            val song = playlist.tracks.data[position]
             val context = it.context
             val intent = Intent(context, DetailsActivity::class.java)
-            intent.putExtra("songJson", Gson().toJson(playlist.tracks.data[position]))
+
+            val songParcel = SongDetails(
+                song.title,
+                song.artist?.name,
+                song.album?.coverLarge,
+                song.duration.secsToMinsAndSecsStr(),
+                song.isExplicit
+            )
+            intent.putExtra("songDetails", songParcel)
             context.startActivity(intent)
         }
         holder.bindPlaylist(playlist.tracks.data[position])
