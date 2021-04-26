@@ -39,7 +39,7 @@ class DetailsViewModel @Inject constructor(): ViewModel() {
         @BindingAdapter("imageUrl")
         @JvmStatic
         fun loadImageFromUri(imageView: ImageView, imageUrl: String) {
-            if (!imageUrl.isNullOrBlank()) Picasso.get().load(imageUrl).into(imageView)
+            if (imageUrl.isNotBlank()) Picasso.get().load(imageUrl).into(imageView)
         }
     }
 }

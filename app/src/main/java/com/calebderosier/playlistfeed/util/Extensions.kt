@@ -2,7 +2,6 @@ package com.calebderosier.playlistfeed.util
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import java.lang.Integer.parseInt
 
 /**
  * Extension that returns a string representing the given duration in mins and secs with format XXmXXs

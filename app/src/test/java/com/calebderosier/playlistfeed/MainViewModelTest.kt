@@ -6,6 +6,8 @@ import org.junit.Assert.*
 import org.junit.Rule
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
+import com.calebderosier.playlistfeed.data.api.DeezerService
+import com.calebderosier.playlistfeed.data.api.PlaylistRepository
 import com.calebderosier.playlistfeed.ui.viewmodels.MainViewModel
 import com.calebderosier.playlistfeed.utils.TestCoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,6 +33,9 @@ class MainViewModelTest {
 
     private lateinit var mainViewModel: MainViewModel
 
+    private val deezerService = mock(DeezerService::class.java)
+    private lateinit var playlistRepository: PlaylistRepository
+
     private lateinit var isLoadingLiveData: LiveData<Boolean>
 
     private lateinit var isErrorLiveData: LiveData<Boolean>
@@ -41,7 +46,7 @@ class MainViewModelTest {
 
     @Before
     fun setup() {
-        mainViewModel = MainViewModel()
+        mainViewModel = MainViewModel(playlistRepository)
         isLoadingLiveData = mainViewModel.isLoading
         isErrorLiveData = mainViewModel.showError
     }

@@ -8,7 +8,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.calebderosier.playlistfeed.ui.views.MainActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
@@ -49,7 +48,7 @@ class MainActivityTest {
     @Test
     fun verifyAdapterIsNull() {
         activityScenario.onActivity {
-            assertEquals(null, it.rv_song_list.adapter)
+            assertEquals(null, it.binding.rvSongList)
         }
     }
 }

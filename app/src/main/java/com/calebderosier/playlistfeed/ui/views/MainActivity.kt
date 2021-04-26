@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
 
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         binding.rvSongList.layoutManager = LinearLayoutManager(this)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
 
         getPlaylistAndUpdateUI()
     }

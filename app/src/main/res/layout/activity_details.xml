@@ -82,7 +82,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:paddingTop="8dp">
+                        android:paddingTop="8dp"
+                        android:paddingBottom="16dp">
 
                         <TextView
                             android:id="@+id/tv_song_length"

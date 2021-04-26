@@ -32,7 +32,7 @@ data class Playlist(
     @SerializedName("picture_medium")
     val pictureMedium: String,
     @SerializedName("picture_big")
-    public val pictureLarge: String,
+    val pictureLarge: String,
     @SerializedName("picture_xl")
     val pictureXL: String,
     @SerializedName("checksum")
